@@ -47,6 +47,7 @@ html {
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     linear-gradient(rgba(20, 28, 47, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(20, 28, 47, 0.04) 1px, transparent 1px),
@@ -81,7 +82,67 @@ a {
 
 .section-shell {
   margin-inline: auto;
-  width: min(94vw, 1480px);
+  width: 100%;
+  max-width: 1480px;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.deck-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1600px;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.deck-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 26%, transparent);
+  border-radius: 999px;
+  background: var(--purple-soft);
+  padding: 0.5rem 0.9rem;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.deck-label::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.hero-board {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 247, 255, 0.98)),
+    radial-gradient(circle at 80% 8%, color-mix(in oklch, var(--primary) 16%, transparent), transparent 22rem);
+  box-shadow: 0 30px 90px rgba(17, 24, 39, 0.12);
+}
+
+.dark-board {
+  border: 1px solid color-mix(in oklch, var(--primary) 30%, var(--ink));
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    var(--ink);
+  background-size: 24px 24px;
+  box-shadow: 0 28px 80px rgba(20, 16, 40, 0.28);
+}
+
+.purple-rail {
+  border-left: 0.38rem solid var(--primary);
+  padding-left: clamp(1rem, 2vw, 1.8rem);
+}
+
+.signal-strip {
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 .fine-grid {

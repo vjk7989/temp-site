@@ -15,7 +15,7 @@ import { Card } from "@/components/ui/card";
 import { contactUrl, products } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "Products | Hyper-Ox by Buckleson",
+  title: "Products",
   description:
     "Explore Hyper Tern, Hyper-ABS, and Hyper-Ox blockchain for secure, private, and verifiable enterprise AI execution.",
   alternates: {
@@ -47,11 +47,11 @@ export default function ProductsPage() {
     <main>
       <SiteHeader />
 
-      <section className="section-shell pb-16 pt-12">
+      <section className="deck-shell pb-16 pt-12">
         <p className="inline-flex rounded-full border border-primary/25 bg-purple-soft px-4 py-2 text-sm font-black text-primary">
           Product stack
         </p>
-        <h1 className="mt-6 max-w-5xl text-[clamp(3rem,8vw,5.8rem)] font-black leading-[0.95] text-ink">
+        <h1 className="mt-6 max-w-5xl text-[clamp(2.55rem,7vw,5.6rem)] font-black leading-[0.98] text-ink">
           A security layer for agentic execution.
         </h1>
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-muted-foreground">
@@ -60,7 +60,7 @@ export default function ProductsPage() {
         </p>
       </section>
 
-      <section className="section-shell grid gap-5 pb-20 lg:grid-cols-3" aria-label="Product shortcuts">
+      <section className="deck-shell grid gap-5 pb-20 lg:grid-cols-3" aria-label="Product shortcuts">
         {products.map((product) => {
           const Icon = icons[product.slug];
           return (
@@ -80,7 +80,7 @@ export default function ProductsPage() {
       </section>
 
       <section className="border-y border-border bg-white py-20">
-        <div className="section-shell space-y-16">
+        <div className="deck-shell space-y-16">
           {products.map((product) => {
             const Icon = icons[product.slug];
             const slug = product.slug as "hyper-tern" | "hyper-abs" | "hyper-ox-blockchain";
@@ -116,7 +116,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="section-shell py-20">
+      <section className="deck-shell py-20">
         <div className="mb-9 max-w-4xl">
           <p className="text-sm font-black text-cyan">Architecture diagrams</p>
           <h2 className="mt-4 text-4xl font-black leading-tight text-ink md:text-6xl">
@@ -135,7 +135,7 @@ export default function ProductsPage() {
       </section>
 
       <section className="border-y border-border bg-muted/70 py-20">
-        <div className="section-shell grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-center">
+        <div className="deck-shell grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-center">
           <div>
             <ShieldCheck className="h-10 w-10 text-primary" />
             <h2 className="mt-6 text-4xl font-black leading-tight text-ink md:text-6xl">

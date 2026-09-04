@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { blogs } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "Blog | Hyper-Ox AI Security",
+  title: "Blog",
   description:
     "Technical articles on cryptography, AI agents, privacy-preserving AI, audit trails, and quantum-proof cryptography for enterprise AI security.",
   alternates: {
@@ -61,11 +61,11 @@ export default function BlogPage() {
     <main>
       <SiteHeader />
 
-      <section className="section-shell pb-16 pt-12">
+      <section className="deck-shell pb-16 pt-12">
         <p className="inline-flex rounded-full border border-primary/25 bg-purple-soft px-4 py-2 text-sm font-black text-primary">
           Blog
         </p>
-        <h1 className="mt-6 max-w-5xl text-[clamp(3rem,8vw,5.8rem)] font-black leading-[0.95] text-ink">
+        <h1 className="mt-6 max-w-5xl text-[clamp(2.55rem,7vw,5.6rem)] font-black leading-[0.98] text-ink">
           Notes on AI trust infrastructure.
         </h1>
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-muted-foreground">
@@ -74,7 +74,7 @@ export default function BlogPage() {
         </p>
       </section>
 
-      <section className="section-shell grid gap-5 pb-20 md:grid-cols-2">
+      <section className="deck-shell grid gap-5 pb-20 md:grid-cols-2">
         {blogs.map((post, index) => {
           const Icon = icons[index] || BookOpen;
           return (
@@ -96,7 +96,7 @@ export default function BlogPage() {
       </section>
 
       <section className="border-y border-border bg-white py-20">
-        <div className="section-shell max-w-5xl space-y-16">
+        <div className="deck-shell max-w-5xl space-y-16">
           {blogs.map((post) => (
             <article key={post.slug} id={post.slug} className="scroll-mt-28">
               <p className="text-sm font-black text-primary">{post.category}</p>
