@@ -1,138 +1,169 @@
 import type { Metadata } from "next";
-import {
-  FileCheck2,
-  Fingerprint,
-  ShieldCheck,
-  Split,
-  Zap
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, FileCheck2, Fingerprint, ShieldCheck, Split } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import {
-  LedgerDiagram,
+  BlockchainMoatDiagram,
+  ProductFlowDiagram,
   SecureInteractionDiagram,
-  SystemArchitectureDiagram
+  SystemArchitectureDiagram,
+  TrustExecutionDiagram
 } from "@/components/architecture-diagrams";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { contactUrl, products } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Products | Hyper-Ox by Buckleson",
   description:
-    "Explore Hyper Tern, Hyper-ABS, and Hyper-Ox Ledger for secure, private, and verifiable enterprise AI execution.",
+    "Explore Hyper Tern, Hyper-ABS, and Hyper-Ox blockchain for secure, private, and verifiable enterprise AI execution.",
   alternates: {
     canonical: "/products"
   },
   openGraph: {
     title: "Products | Hyper-Ox by Buckleson",
     description:
-      "Architecture diagrams and product details for the Hyper-Ox AI security stack.",
+      "Product details and architecture diagrams for the Hyper-Ox AI security stack.",
     url: "/products",
     type: "website"
+  },
+  twitter: {
+    card: "summary",
+    title: "Products | Hyper-Ox by Buckleson",
+    description:
+      "Hyper Tern, Hyper-ABS, and Hyper-Ox blockchain architecture for enterprise AI execution."
   }
 };
 
 const icons: Record<string, LucideIcon> = {
   "hyper-tern": Split,
   "hyper-abs": Fingerprint,
-  "hyper-ox-ledger": FileCheck2
+  "hyper-ox-blockchain": FileCheck2
 };
 
 export default function ProductsPage() {
   return (
     <main>
       <SiteHeader />
-      <section className="mx-auto w-[min(94vw,1500px)] pb-16 pt-10">
-        <p className="inline-flex rounded-sm border border-border bg-muted px-3 py-2 text-sm font-bold uppercase tracking-widest text-cyan">
-          Products
+
+      <section className="section-shell pb-16 pt-12">
+        <p className="inline-flex rounded-full border border-primary/25 bg-purple-soft px-4 py-2 text-sm font-black text-primary">
+          Product stack
         </p>
-        <h1 className="mt-5 max-w-6xl text-[clamp(3.2rem,9vw,6rem)] font-[760] uppercase leading-[0.9] tracking-[-0.035em]">
-          A security stack for AI execution.
+        <h1 className="mt-6 max-w-5xl text-[clamp(3rem,8vw,5.8rem)] font-black leading-[0.95] text-ink">
+          A security layer for agentic execution.
         </h1>
-        <p className="mt-7 max-w-3xl text-xl leading-tight text-muted-foreground md:text-2xl">
-          Hyper-Ox brings routing, data abstraction, policy enforcement, and
-          cryptographic verification into one enterprise-ready control layer.
+        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+          Hyper-Ox combines routing, abstraction, and cryptographic verification so enterprise AI
+          teams can move from prototypes to controlled production workflows.
         </p>
       </section>
 
-      <section className="mx-auto grid w-[min(94vw,1500px)] gap-6 pb-20 lg:grid-cols-3">
+      <section className="section-shell grid gap-5 pb-20 lg:grid-cols-3" aria-label="Product shortcuts">
         {products.map((product) => {
           const Icon = icons[product.slug];
           return (
-              <Card key={product.slug} id={product.slug} className="surface-grid scroll-mt-24 p-7">
-              <Icon className="h-10 w-10 text-cyan" />
-              <CardHeader className="p-0 pt-8">
-                <p className="text-xs font-bold uppercase tracking-widest text-primary">
-                  {product.label}
-                </p>
-                <CardTitle className="text-4xl uppercase">{product.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="p-0 pt-5">
-                <p className="text-lg leading-tight text-muted-foreground">
-                  {product.details}
-                </p>
-                <div className="mt-7 grid gap-3">
-                  {product.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-3 font-bold">
-                      <ShieldCheck className="h-5 w-5 text-primary" />
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <Link key={product.slug} href={`#${product.slug}`} className="group block">
+              <Card className="h-full rounded-md p-6 transition group-hover:-translate-y-1 group-hover:border-primary">
+                <Icon className="h-9 w-9 text-primary" />
+                <p className="mt-7 text-sm font-black text-cyan">{product.label}</p>
+                <h2 className="mt-3 text-3xl font-black text-ink">{product.name}</h2>
+                <p className="mt-4 leading-relaxed text-muted-foreground">{product.copy}</p>
+                <span className="mt-7 inline-flex items-center gap-2 font-black text-primary">
+                  See details <ArrowRight className="h-4 w-4" />
+                </span>
+              </Card>
+            </Link>
           );
         })}
       </section>
 
-      <section className="border-y-2 border-border bg-muted/60 py-20">
-        <div className="mx-auto w-[min(94vw,1500px)]">
-          <p className="text-sm font-bold uppercase tracking-widest text-cyan">
-            Architecture diagrams
-          </p>
-          <h2 className="mt-4 max-w-4xl text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
-            Recreated from the deck for the web.
-          </h2>
-          <div className="mt-10 space-y-8">
-            <SecureInteractionDiagram />
-            <SystemArchitectureDiagram />
-            <LedgerDiagram />
-          </div>
+      <section className="border-y border-border bg-white py-20">
+        <div className="section-shell space-y-16">
+          {products.map((product) => {
+            const Icon = icons[product.slug];
+            const slug = product.slug as "hyper-tern" | "hyper-abs" | "hyper-ox-blockchain";
+            return (
+              <article
+                key={product.slug}
+                id={product.slug}
+                className="scroll-mt-28 grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start"
+              >
+                <div>
+                  <Icon className="h-10 w-10 text-primary" />
+                  <p className="mt-6 text-sm font-black text-primary">{product.eyebrow}</p>
+                  <h2 className="mt-3 text-4xl font-black leading-tight text-ink md:text-6xl">
+                    {product.name}
+                  </h2>
+                  <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{product.details}</p>
+                  <div className="mt-7 grid gap-3">
+                    {product.features.map((feature) => (
+                      <div key={feature} className="flex gap-3 font-bold text-ink">
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-8 rounded-md border border-primary/25 bg-purple-soft p-4 font-black text-primary">
+                    {product.outcome}
+                  </p>
+                </div>
+                <ProductFlowDiagram product={slug} />
+              </article>
+            );
+          })}
         </div>
       </section>
 
-      <section className="mx-auto grid w-[min(94vw,1500px)] gap-8 py-20 lg:grid-cols-[1fr_0.7fr] lg:items-center">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">
-            Why it matters
-          </p>
-          <h2 className="mt-4 text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
-            AI agents need a trust boundary.
+      <section className="section-shell py-20">
+        <div className="mb-9 max-w-4xl">
+          <p className="text-sm font-black text-cyan">Architecture diagrams</p>
+          <h2 className="mt-4 text-4xl font-black leading-tight text-ink md:text-6xl">
+            Recreated from the deck for the web.
           </h2>
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+            These diagrams are static, accessible components so product details stay indexable and fast.
+          </p>
         </div>
-        <Card className="p-7">
-          <div className="grid gap-5">
-            {[
-              ["Controlled", "Granular permission checks before data or action access."],
-              ["Private", "Models operate on protected context instead of raw source data."],
-              ["Verifiable", "Critical actions produce durable proof records."]
-            ].map(([title, copy]) => (
-              <div key={title} className="flex gap-4">
-                <Zap className="mt-1 h-5 w-5 shrink-0 text-primary" />
-                <div>
-                  <p className="font-bold uppercase">{title}</p>
-                  <p className="text-muted-foreground">{copy}</p>
-                </div>
-              </div>
-            ))}
+        <div className="space-y-8">
+          <TrustExecutionDiagram />
+          <SecureInteractionDiagram />
+          <SystemArchitectureDiagram />
+          <BlockchainMoatDiagram />
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-muted/70 py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-center">
+          <div>
+            <ShieldCheck className="h-10 w-10 text-primary" />
+            <h2 className="mt-6 text-4xl font-black leading-tight text-ink md:text-6xl">
+              The trust boundary belongs between agents and infrastructure.
+            </h2>
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+              Hyper-Ox is designed to mediate data ingress, action egress, and verification without
+              asking enterprises to rebuild their application stack first.
+            </p>
           </div>
-          <Button asChild size="lg" className="mt-8 w-full">
-            <a href={contactUrl} target="_blank" rel="noreferrer">
-              Talk to Buckleson
-            </a>
-          </Button>
-        </Card>
+          <Card className="rounded-md p-6">
+            <div className="grid gap-5">
+              {[
+                ["Controlled", "Granular permission checks before data or action access."],
+                ["Private", "Models operate on protected context instead of raw source data."],
+                ["Verifiable", "Critical actions produce durable proof records."]
+              ].map(([title, copy]) => (
+                <div key={title} className="rounded-md border border-border bg-white p-4">
+                  <p className="font-black text-ink">{title}</p>
+                  <p className="mt-1 text-muted-foreground">{copy}</p>
+                </div>
+              ))}
+            </div>
+            <Button asChild size="lg" className="mt-7 w-full">
+              <a href={contactUrl}>Talk to Buckleson</a>
+            </Button>
+          </Card>
+        </div>
       </section>
     </main>
   );

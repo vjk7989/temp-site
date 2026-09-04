@@ -1,35 +1,64 @@
-export const contactUrl = "https://cal.com/buckleson-group/30min";
+export const baseUrl = "https://www.pavii.tech";
+
+export const contact = {
+  email: "info@pavii.tech",
+  phone: "7981847657",
+  site: baseUrl
+};
+
+export const contactUrl = `mailto:${contact.email}`;
 
 export const products = [
   {
     slug: "hyper-tern",
     name: "Hyper Tern",
-    label: "Routing and permissions",
-    copy: "Routes LLM requests, controls access scopes, and keeps models away from direct infrastructure access.",
-    outcome: "Policy-controlled execution",
+    label: "Routing layer",
+    eyebrow: "LLM routing and execution control",
+    copy:
+      "Routes model requests through policy, permission, and intent checks before they touch enterprise systems.",
+    outcome: "AI never interacts with infrastructure directly.",
     details:
-      "Hyper Tern is the control plane between AI models, enterprise data, and internal tools. It evaluates intent, applies permissions, selects the right model or route, and blocks direct access to unsafe resources.",
-    features: ["Smart routing", "Access control", "Permission gating", "Zero direct exposure"]
+      "Hyper Tern sits between AI models and enterprise infrastructure. It decides where a request can go, which model or tool should handle it, and whether the action is allowed under the current policy.",
+    features: [
+      "Smart routing across open, closed, and custom models",
+      "Access scopes checked before data or tool use",
+      "Permission gates for every sensitive action",
+      "Zero direct connection between models and infrastructure"
+    ]
   },
   {
     slug: "hyper-abs",
     name: "Hyper-ABS",
-    label: "Data abstraction",
-    copy: "Transforms sensitive records into masked, tokenized, or vector-safe representations before inference.",
-    outcome: "No raw exposure",
+    label: "Data layer",
+    eyebrow: "Data abstraction layer",
+    copy:
+      "Transforms raw sensitive records into masked, tokenized, or vector-safe representations before inference.",
+    outcome: "AI works on abstraction, not source data.",
     details:
-      "Hyper-ABS decouples sensitive enterprise data from AI model execution. Raw records become protected representations through masking, tokenization, redaction, and vector-safe abstractions.",
-    features: ["PII and PHI masking", "Tokenized context", "Protected representations", "Utility-preserving privacy"]
+      "Hyper-ABS decouples enterprise data from the models that need to reason over it. It preserves useful context while reducing exposure of PII, PHI, financial, and operational records.",
+    features: [
+      "Masking and redaction before model access",
+      "Tokenized and vector-safe context",
+      "Privacy preservation at the secure boundary",
+      "Utility retained for reasoning without raw exposure"
+    ]
   },
   {
-    slug: "hyper-ox-ledger",
-    name: "Hyper-Ox Ledger",
-    label: "Blockchain trust layer",
-    copy: "Records AI decisions and actions as immutable proof for audit, settlement, compliance, and disputes.",
-    outcome: "Verifiable audit trails",
+    slug: "hyper-ox-blockchain",
+    name: "Hyper-Ox",
+    label: "Trust layer",
+    eyebrow: "Blockchain verification and settlement",
+    copy:
+      "Turns AI decisions and actions into verifiable records for audit, settlement, compliance, and disputes.",
+    outcome: "Black-box AI becomes provable infrastructure.",
     details:
-      "Hyper-Ox Ledger turns AI operations into cryptographically verifiable records. It creates a durable execution history for audit, billing, settlement, compliance, and dispute resolution.",
-    features: ["Immutable audit log", "Proof of execution", "Settlement records", "Cross-ecosystem verification"]
+      "Hyper-Ox underpins AI execution with cryptographic proof. Critical actions can produce a durable record of who acted, what changed, when it happened, and which policy allowed it.",
+    features: [
+      "Verifiable execution records",
+      "Non-intrusive overlay for existing systems",
+      "Settlement and audit trails",
+      "Immutable ledger for long-lived compliance evidence"
+    ]
   }
 ];
 
@@ -39,7 +68,7 @@ export const blogs = [
     title: "Cryptography Is Becoming the Control Surface for AI",
     category: "Cryptography",
     description:
-      "Why modern AI systems need cryptographic proof, not just application logs, to become trustworthy enterprise infrastructure.",
+      "Enterprise AI needs proof that an action, policy check, and execution record belong together.",
     readTime: "4 min read"
   },
   {
@@ -47,7 +76,7 @@ export const blogs = [
     title: "AI Agents Need Policy Before Autonomy",
     category: "AI Agents",
     description:
-      "Agentic systems can read, decide, and act. The security model has to govern the action path, not only the prompt.",
+      "Agentic systems read, decide, and act. The security model has to govern that action path.",
     readTime: "5 min read"
   },
   {
@@ -55,7 +84,7 @@ export const blogs = [
     title: "Private AI Starts Before the Model Sees Data",
     category: "AI Security",
     description:
-      "Masking, tokenization, and abstraction let enterprises preserve utility without handing raw data to probabilistic systems.",
+      "Abstraction lets enterprises preserve reasoning utility without handing raw records to probabilistic systems.",
     readTime: "4 min read"
   },
   {
@@ -63,7 +92,24 @@ export const blogs = [
     title: "Quantum-proof Cryptography and the AI Trust Layer",
     category: "Quantum-proof Cryptography",
     description:
-      "A practical view of why long-lived AI audit records should be designed for a post-quantum security horizon.",
+      "Long-lived AI audit trails should be designed for cryptographic agility and a post-quantum horizon.",
     readTime: "5 min read"
+  },
+  {
+    slug: "agent-audit-trails",
+    title: "Why AI Agent Audit Trails Need More Than Logs",
+    category: "Auditability",
+    description:
+      "A practical look at execution records, policy decisions, and proof for regulated AI workflows.",
+    readTime: "4 min read"
   }
+];
+
+export const verticals = [
+  "Medical AI",
+  "Genomics",
+  "Mental Health",
+  "Insurance and Risk",
+  "Fitness AI",
+  "Enterprise Copilots"
 ];

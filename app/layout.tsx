@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { baseUrl } from "@/lib/site-data";
 import "./globals.css";
 
 const geist = Geist({
@@ -8,31 +9,52 @@ const geist = Geist({
   display: "swap"
 });
 
+const title = "Hyper-Ox by Buckleson | AI Trust and Execution Layer";
+const description =
+  "Hyper-Ox controls, abstracts, and verifies enterprise AI execution with routing, privacy-preserving data abstraction, and cryptographic audit trails.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.pavii.tech"),
-  title: "Hyper-Ox by Buckleson | One-stop AI Security",
-  description:
-    "Hyper-Ox is a trust, privacy, policy, and execution layer for enterprise AI systems.",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: title,
+    template: "%s | Hyper-Ox by Buckleson"
+  },
+  description,
+  applicationName: "Hyper-Ox",
   alternates: {
     canonical: "/"
   },
+  keywords: [
+    "Hyper-Ox",
+    "Buckleson",
+    "AI security",
+    "AI agents",
+    "cryptographic audit trails",
+    "privacy preserving AI",
+    "quantum proof cryptography",
+    "enterprise AI infrastructure"
+  ],
   openGraph: {
-    title: "Hyper-Ox by Buckleson | One-stop AI Security",
-    description:
-      "A one-stop AI security layer for private data access, controlled agent execution, and verifiable audit trails.",
+    title,
+    description,
     url: "/",
     siteName: "Hyper-Ox by Buckleson",
     type: "website"
   },
   twitter: {
     card: "summary",
-    title: "Hyper-Ox by Buckleson | One-stop AI Security",
-    description:
-      "Private, policy-controlled, and verifiable AI execution for enterprise systems."
+    title,
+    description
   },
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
   }
 };
 
