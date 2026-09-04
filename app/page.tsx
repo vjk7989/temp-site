@@ -19,20 +19,14 @@ import type { LucideIcon } from "lucide-react";
 import { SecureInteractionDiagram } from "@/components/architecture-diagrams";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { contactUrl, products } from "@/lib/site-data";
+import { Card } from "@/components/ui/card";
+import { blogs, contactUrl, products } from "@/lib/site-data";
 
 const productIcons: Record<string, LucideIcon> = {
   "hyper-tern": Split,
   "hyper-abs": Fingerprint,
   "hyper-ox-ledger": FileCheck2
 };
-
-const risks = [
-  ["Access to data", "Sensitive user, enterprise, and operational records are needed for context."],
-  ["System integration", "AI agents need APIs, tools, and workflows to execute business logic."],
-  ["Autonomous action", "Models can trigger updates, messages, decisions, and transactions."]
-];
 
 const verticals: Array<[string, LucideIcon]> = [
   ["Medical AI", Stethoscope],
@@ -43,11 +37,10 @@ const verticals: Array<[string, LucideIcon]> = [
   ["Enterprise Copilots", Building2]
 ];
 
-const proofPoints = [
-  "Raw-data exposure reduction",
-  "Policy-controlled execution",
-  "Auditable verification records",
-  "Latency and reliability benchmarks"
+const failures = [
+  ["Raw data exposure", "Models need context, but direct access leaks sensitive records into unpredictable execution paths."],
+  ["No execution proof", "Traditional logs struggle to prove what an AI agent actually did, why it did it, and what policy allowed it."],
+  ["Compliance drift", "Autonomous actions can break permissions, regulatory constraints, and audit expectations before teams notice."]
 ];
 
 export default function Home() {
@@ -55,208 +48,223 @@ export default function Home() {
     <main className="overflow-hidden">
       <SiteHeader />
 
-      <section id="top" className="mx-auto w-[min(94vw,1500px)] pb-20 pt-8 lg:pb-28">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-          <div>
-            <p className="mb-5 inline-flex border-2 border-primary bg-primary px-4 py-2 text-xs font-bold uppercase tracking-widest">
-              One-stop security solution for AI
+      <section className="mx-auto grid w-[min(94vw,1500px)] gap-10 pb-20 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="lift-in">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 rounded-sm border border-border bg-muted px-3 py-2 text-sm font-bold text-muted-foreground transition hover:border-accent hover:text-accent"
+          >
+            v1 trust stack live <ArrowRight className="h-4 w-4" />
+          </Link>
+          <h1 className="mt-6 max-w-5xl text-[clamp(3.6rem,9.5vw,6rem)] font-[760] uppercase leading-[0.9] tracking-[-0.035em]">
+            Escape unsafe AI execution.
+          </h1>
+          <p className="mt-7 max-w-2xl text-xl leading-relaxed text-muted-foreground">
+            Hyper-Ox is the one-stop security layer for AI agents: private data
+            access, route-level policy, controlled actions, and cryptographic
+            proof in one execution plane.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg">
+              <a href={contactUrl} target="_blank" rel="noreferrer">
+                Book 30 min <ArrowRight className="h-5 w-5" />
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/products">View products</Link>
+            </Button>
+          </div>
+        </div>
+
+        <Card className="surface-grid lift-in overflow-hidden p-0">
+          <div className="border-b-2 border-border bg-muted p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+              Execution console
             </p>
-            <h1 className="max-w-6xl text-[clamp(3.4rem,10vw,10.5rem)] font-bold uppercase leading-[0.85] tracking-tight">
-              Secure AI runs, not just AI ideas.
-            </h1>
-            <p className="mt-8 max-w-3xl text-xl leading-tight text-muted-foreground md:text-2xl">
-              Hyper-Ox gives enterprise AI a trust and execution layer for
-              data privacy, routing policy, controlled actions, and immutable
-              proof.
-            </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg">
-                <a href={contactUrl} target="_blank" rel="noreferrer">
-                  Contact Us <ArrowRight className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#architecture">See Architecture</a>
-              </Button>
+          </div>
+          <div className="grid gap-px bg-border md:grid-cols-[0.8fr_1.2fr]">
+            <div className="bg-card p-6">
+              <p className="text-sm text-muted-foreground">request.intent</p>
+              <p className="mt-2 text-2xl font-bold">Approve clinical summary agent</p>
+              <div className="mt-8 space-y-3">
+                {["PII redacted", "Scope checked", "Ledger pending"].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-sm font-bold">
+                    <CheckCircle2 className="h-5 w-5 text-accent" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-background p-6">
+              <div className="grid gap-4">
+                <FlowStep icon={Database} title="Data ingress" copy="PHI, docs, records" />
+                <FlowStep icon={ShieldCheck} title="Hyper Tern" copy="Policy route and scope gate" active />
+                <FlowStep icon={BrainCircuit} title="AI model" copy="Protected context only" />
+                <FlowStep icon={FileCheck2} title="Proof" copy="Immutable audit record" verified />
+              </div>
             </div>
           </div>
-          <Card className="relative min-h-[430px] overflow-hidden p-6">
-            <div className="absolute -right-8 -top-7 text-[10rem] font-bold leading-none text-primary/15 md:text-[14rem]">
-              01
-            </div>
-            <p className="relative text-sm font-bold uppercase tracking-widest text-primary">
-              Trust Layer Active
-            </p>
-            <div className="relative mt-8 space-y-5">
-              <FlowNode icon={Database} title="Enterprise data" text="PII, docs, databases" />
-              <div className="ml-8 h-10 w-px bg-primary" />
-              <FlowNode icon={ShieldCheck} title="Hyper Tern" text="Ingress policy, scope checks, redaction" active />
-              <div className="ml-8 h-10 w-px bg-primary" />
-              <FlowNode icon={BrainCircuit} title="AI models" text="LLMs, agents, copilots" />
-            </div>
-            <div className="relative mt-8 grid grid-cols-3 gap-2 text-center text-xs font-bold uppercase text-muted-foreground">
-              <span>Controlled</span>
-              <span>Logged</span>
-              <span>Verifiable</span>
-            </div>
-          </Card>
-        </div>
+        </Card>
       </section>
 
       <section className="border-y-2 border-border bg-accent py-4 text-accent-foreground">
-        <div className="marquee flex w-max gap-10 text-3xl font-bold uppercase tracking-tight md:text-5xl">
+        <div className="marquee flex w-max gap-12 text-3xl font-[760] uppercase tracking-[-0.03em] md:text-5xl">
           {[...Array(2)].map((_, repeat) => (
-            <div className="flex gap-10" key={repeat} aria-hidden={repeat === 1}>
-              <span>Privacy</span>
-              <span>Policy</span>
-              <span>Audit</span>
-              <span>Settlement</span>
-              <span>No raw exposure</span>
-              <span>Execution proof</span>
+            <div className="flex gap-12" key={repeat} aria-hidden={repeat === 1}>
+              <span>Private context</span>
+              <span>Permissioned tools</span>
+              <span>Agent audit</span>
+              <span>Proof of execution</span>
+              <span>Quantum-ready verification</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto w-[min(94vw,1500px)] py-20 md:py-28">
-        <SectionIntro
-          eyebrow="The enterprise gap"
-          title="AI adoption is inevitable. Trust is not."
-          copy="Modern AI needs deep access to useful systems. Without a control layer, that access creates data exposure, weak execution guarantees, and compliance risk."
-        />
-        <div className="mt-10 grid gap-px bg-border md:grid-cols-3">
-          {risks.map(([title, copy], index) => (
-            <Card key={title} className="group border-0 p-7 transition hover:bg-accent hover:text-accent-foreground">
-              <span className="text-7xl font-bold text-muted group-hover:text-accent-foreground">
-                0{index + 1}
-              </span>
-              <CardHeader className="p-0 pt-8">
-                <CardTitle className="uppercase">{title}</CardTitle>
-              </CardHeader>
-              <CardContent className="p-0 pt-4 text-lg text-muted-foreground group-hover:text-accent-foreground/80">
-                {copy}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#f4f0ff] py-20 text-[#10101a] md:py-28">
-        <div className="mx-auto w-[min(94vw,1500px)]">
-          <SectionIntro
-            eyebrow="The stack"
-            title="One security plane for AI data, tools, and actions."
-            copy="Hyper-Ox combines routing, abstraction, execution control, and blockchain-backed proof into a single enterprise layer."
-            light
-          />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {products.map((item) => {
-              const Icon = productIcons[item.slug];
-              return (
-              <Link key={item.name} href={`/products#${item.slug}`} className="group block">
-              <Card className="h-full border-[#d9caef] bg-white p-7 text-[#10101a] transition group-hover:border-primary group-hover:bg-[#fbf8ff]">
-                <Icon className="h-10 w-10 text-primary" />
-                <CardHeader className="p-0 pt-8">
-                  <p className="text-xs font-bold uppercase tracking-widest text-primary">
-                    {item.label}
-                  </p>
-                  <CardTitle className="text-4xl uppercase">{item.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0 pt-5">
-                  <p className="text-lg leading-tight text-[#55566a]">{item.copy}</p>
-                  <p className="mt-8 border-t border-[#d9caef] pt-5 text-sm font-bold uppercase tracking-widest">
-                    {item.outcome} <ArrowRight className="inline h-4 w-4" />
-                  </p>
-                </CardContent>
-              </Card>
-              </Link>
-              );
-            })}
+      <section className="mx-auto w-[min(94vw,1500px)] py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div>
+            <h2 className="text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
+              The problem is execution, not intelligence.
+            </h2>
+            <p className="mt-6 text-xl leading-relaxed text-muted-foreground">
+              Enterprises already know AI is capable. The open question is
+              whether agents can touch real systems without exposing data,
+              bypassing policy, or leaving unverifiable side effects.
+            </p>
+          </div>
+          <div className="grid gap-px bg-border md:grid-cols-3">
+            {failures.map(([title, copy]) => (
+              <div key={title} className="bg-card p-6">
+                <p className="text-5xl font-[760] text-primary">!</p>
+                <h3 className="mt-8 text-2xl font-bold uppercase">{title}</h3>
+                <p className="mt-4 leading-relaxed text-muted-foreground">{copy}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="architecture" className="mx-auto w-[min(94vw,1500px)] py-20 md:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+      <section className="mx-auto w-[min(94vw,1500px)] pb-20">
+        <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-primary">
-              End-to-end architecture
-            </p>
-            <h2 className="mt-4 text-5xl font-bold uppercase leading-none md:text-7xl">
-              Every AI action passes through trust.
+            <h2 className="max-w-4xl text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
+              Products that click into architecture.
             </h2>
+            <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+              Each layer handles one security boundary. Click any product to see
+              details and diagrams.
+            </p>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/products">Open products</Link>
+          </Button>
+        </div>
+        <div className="grid gap-5 lg:grid-cols-3">
+          {products.map((product) => {
+            const Icon = productIcons[product.slug];
+            return (
+              <Link key={product.slug} href={`/products#${product.slug}`} className="group block">
+                <Card className="h-full overflow-hidden p-0 transition group-hover:-translate-y-1 group-hover:border-accent">
+                  <div className="flex items-center justify-between border-b-2 border-border p-5">
+                    <Icon className="h-8 w-8 text-cyan" />
+                    <ArrowRight className="h-5 w-5 text-muted-foreground transition group-hover:text-accent" />
+                  </div>
+                  <div className="p-6">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">{product.label}</p>
+                    <h3 className="mt-5 text-4xl font-[740] uppercase leading-none">{product.name}</h3>
+                    <p className="mt-5 leading-relaxed text-muted-foreground">{product.copy}</p>
+                    <p className="mt-8 inline-flex border border-border px-3 py-2 text-sm font-bold text-accent">
+                      {product.outcome}
+                    </p>
+                  </div>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="architecture" className="border-y-2 border-border bg-muted/60 py-20">
+        <div className="mx-auto grid w-[min(94vw,1500px)] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div>
+            <h2 className="text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
+              Architecture you can point at.
+            </h2>
+            <p className="mt-6 text-xl leading-relaxed text-muted-foreground">
+              The diagram is no longer trapped in the pitch deck. It is rebuilt
+              as page-native content for performance, SEO, and accessibility.
+            </p>
           </div>
           <SecureInteractionDiagram />
         </div>
       </section>
 
-      <section className="border-y-2 border-border bg-[#f3f1fa] py-20 md:py-28">
-        <div className="mx-auto grid w-[min(94vw,1500px)] gap-10 lg:grid-cols-2">
+      <section className="mx-auto w-[min(94vw,1500px)] py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
           <div>
-            <SectionIntro
-              eyebrow="Proof points"
-              title="Built to validate security, privacy, latency, and auditability."
-              copy="The 12-month validation roadmap turns the architecture into an enterprise-ready pilot with measurable benchmarks."
-            />
-            <div className="mt-8 space-y-4">
-              {proofPoints.map((point) => (
-                <div key={point} className="flex items-center gap-3 text-lg font-bold">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  {point}
-                </div>
-              ))}
-            </div>
-          </div>
-          <Card className="p-7">
-            <p className="text-sm font-bold uppercase tracking-widest text-primary">
-              Market signal
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <Metric value="$3.0T" label="Global AI infrastructure TAM" />
-              <Metric value="$250B" label="Secure AI and confidential compute SAM" />
-              <Metric value="$2.0M" label="Near-term regulated enterprise SOM" />
-            </div>
-            <p className="mt-8 text-lg text-muted-foreground">
-              Initial focus: high-value, privacy-sensitive teams where security is
-              the adoption bottleneck.
-            </p>
-          </Card>
-        </div>
-      </section>
-
-      <section className="mx-auto w-[min(94vw,1500px)] py-20 md:py-28">
-        <SectionIntro
-          eyebrow="Target teams"
-          title="For regulated AI that cannot afford blind spots."
-          copy="The go-to-market focus is narrow by design: teams where data sensitivity, auditability, and deep integration decide whether AI reaches production."
-        />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {verticals.map(([name, Icon]) => (
-            <Card key={name} className="flex items-center gap-4 p-5">
-              <Icon className="h-7 w-7 text-primary" />
-              <span className="text-xl font-bold uppercase">{name}</span>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-accent py-20 text-accent-foreground md:py-28">
-        <div className="mx-auto grid w-[min(94vw,1500px)] gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-widest">
-              Let&apos;s build together
-            </p>
-            <h2 className="mt-5 max-w-4xl text-5xl font-bold uppercase leading-none md:text-8xl">
-              Make enterprise AI provable.
+            <h2 className="text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
+              Built for regulated AI teams.
             </h2>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Focused on markets where privacy and auditability decide whether
+              an AI agent can move from prototype to production.
+            </p>
           </div>
-          <Card className="border-accent-foreground bg-white p-7 text-foreground">
-            <div className="space-y-5">
+          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {verticals.map(([name, Icon]) => (
+              <div key={name} className="flex min-h-32 items-end justify-between bg-card p-5">
+                <span className="text-2xl font-bold uppercase leading-none">{name}</span>
+                <Icon className="h-7 w-7 shrink-0 text-cyan" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y-2 border-border bg-background py-20">
+        <div className="mx-auto w-[min(94vw,1500px)]">
+          <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <h2 className="max-w-4xl text-5xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-7xl">
+              Research notes, not content filler.
+            </h2>
+            <Button asChild variant="outline">
+              <Link href="/blog">Read blog</Link>
+            </Button>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {blogs.slice(0, 4).map((post) => (
+              <Link key={post.slug} href={`/blog#${post.slug}`} className="group block">
+                <Card className="h-full p-6 transition group-hover:border-cyan group-hover:bg-muted">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan">
+                    {post.category} - {post.readTime}
+                  </p>
+                  <h3 className="mt-4 text-2xl font-bold uppercase">{post.title}</h3>
+                  <p className="mt-4 text-muted-foreground">{post.description}</p>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-accent py-20 text-accent-foreground">
+        <div className="mx-auto grid w-[min(94vw,1500px)] gap-10 lg:grid-cols-[1fr_0.78fr] lg:items-center">
+          <div>
+            <h2 className="max-w-4xl text-5xl font-[760] uppercase leading-[0.9] tracking-[-0.035em] md:text-7xl">
+              Make AI actions provable.
+            </h2>
+            <p className="mt-6 max-w-2xl text-xl">
+              Bring us the agent workflow. We will help map the trust boundary.
+            </p>
+          </div>
+          <Card className="border-accent-foreground bg-accent-foreground p-6 text-background">
+            <div className="space-y-4">
               <ContactLine icon={Mail} text="info@pavii.tec" href="mailto:info@pavii.tec" />
               <ContactLine icon={Mail} text="vijay@buckleson.com" href="mailto:vijay@buckleson.com" />
               <ContactLine icon={Phone} text="+91 7981847657" href="tel:+917981847657" />
             </div>
-            <Button asChild size="lg" className="mt-8 w-full">
+            <Button asChild size="lg" className="mt-6 w-full">
               <a href={contactUrl} target="_blank" rel="noreferrer">
                 Contact Us <ArrowRight className="h-5 w-5" />
               </a>
@@ -268,61 +276,26 @@ export default function Home() {
   );
 }
 
-function SectionIntro({
-  eyebrow,
-  title,
-  copy,
-  light = false
-}: {
-  eyebrow: string;
-  title: string;
-  copy: string;
-  light?: boolean;
-}) {
-  return (
-    <div>
-      <p className="text-sm font-bold uppercase tracking-widest text-primary">
-        {eyebrow}
-      </p>
-      <h2 className="mt-4 max-w-5xl text-5xl font-bold uppercase leading-none md:text-7xl">
-        {title}
-      </h2>
-      <p className={`mt-6 max-w-3xl text-xl leading-tight md:text-2xl ${light ? "text-[#55566a]" : "text-muted-foreground"}`}>
-        {copy}
-      </p>
-    </div>
-  );
-}
-
-function FlowNode({
+function FlowStep({
   icon: Icon,
   title,
-  text,
-  active = false
+  copy,
+  active = false,
+  verified = false
 }: {
-  icon: typeof Database;
+  icon: LucideIcon;
   title: string;
-  text: string;
+  copy: string;
   active?: boolean;
+  verified?: boolean;
 }) {
   return (
-    <div className={`flex items-center gap-4 border-2 p-4 ${active ? "border-primary bg-primary/20" : "border-border bg-background"}`}>
-      <Icon className="h-7 w-7 text-primary" />
+    <div className={`flex items-center gap-4 border-2 p-4 ${active ? "border-primary bg-primary/15" : verified ? "border-accent bg-accent/10" : "border-border bg-card"}`}>
+      <Icon className={`h-6 w-6 ${verified ? "text-accent" : "text-cyan"}`} />
       <div>
         <p className="font-bold uppercase">{title}</p>
-        <p className="text-sm text-muted-foreground">{text}</p>
+        <p className="text-sm text-muted-foreground">{copy}</p>
       </div>
-    </div>
-  );
-}
-
-function Metric({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="border-2 border-border p-5">
-      <p className="text-4xl font-bold text-primary">{value}</p>
-      <p className="mt-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
-        {label}
-      </p>
     </div>
   );
 }
@@ -332,7 +305,7 @@ function ContactLine({
   text,
   href
 }: {
-  icon: typeof Mail;
+  icon: LucideIcon;
   text: string;
   href: string;
 }) {

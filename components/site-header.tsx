@@ -6,14 +6,14 @@ import { contactUrl } from "@/lib/site-data";
 
 export function SiteHeader() {
   return (
-    <header className="mx-auto flex w-[min(94vw,1500px)] items-center justify-between py-6">
+    <header className="sticky top-0 z-20 mx-auto flex w-[min(94vw,1500px)] items-center justify-between border-b border-border/70 bg-background/90 py-5 backdrop-blur">
       <Link href="/" className="flex items-center gap-3" aria-label="Hyper-Ox home">
         <Image
           src="/bson-logo.jpg"
           alt="Buckleson logo"
           width={42}
           height={42}
-          className="border border-border"
+          className="rounded-sm border border-border"
           priority
         />
         <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">

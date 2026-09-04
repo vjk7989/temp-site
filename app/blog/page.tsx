@@ -49,9 +49,11 @@ export default function BlogPage() {
   return (
     <main>
       <SiteHeader />
-      <section className="mx-auto w-[min(94vw,1500px)] pb-16 pt-8">
-        <p className="text-sm font-bold uppercase tracking-widest text-primary">Blog</p>
-        <h1 className="mt-4 max-w-6xl text-[clamp(3.3rem,9vw,9rem)] font-bold uppercase leading-[0.88] tracking-tight">
+      <section className="mx-auto w-[min(94vw,1500px)] pb-16 pt-10">
+        <p className="inline-flex rounded-sm border border-border bg-muted px-3 py-2 text-sm font-bold uppercase tracking-widest text-cyan">
+          Blog
+        </p>
+        <h1 className="mt-5 max-w-6xl text-[clamp(3.2rem,9vw,6rem)] font-[760] uppercase leading-[0.9] tracking-[-0.035em]">
           Notes on AI trust infrastructure.
         </h1>
         <p className="mt-7 max-w-3xl text-xl leading-tight text-muted-foreground md:text-2xl">
@@ -65,8 +67,8 @@ export default function BlogPage() {
           const Icon = icons[index] || BookOpen;
           return (
             <a key={post.slug} href={`#${post.slug}`} className="group block">
-              <Card className="h-full p-7 transition group-hover:border-primary group-hover:bg-[#f7f2ff]">
-                <Icon className="h-9 w-9 text-primary" />
+              <Card className="h-full p-7 transition group-hover:-translate-y-1 group-hover:border-cyan group-hover:bg-muted">
+                <Icon className="h-9 w-9 text-cyan" />
                 <CardHeader className="p-0 pt-7">
                   <p className="text-xs font-bold uppercase tracking-widest text-primary">
                     {post.category} - {post.readTime}
@@ -85,14 +87,14 @@ export default function BlogPage() {
         })}
       </section>
 
-      <section className="border-y-2 border-border bg-[#f4f0ff] py-20">
+      <section className="border-y-2 border-border bg-muted/60 py-20">
         <div className="mx-auto w-[min(94vw,1100px)] space-y-14">
           {blogs.map((post) => (
             <article key={post.slug} id={post.slug} className="scroll-mt-8">
-              <p className="text-sm font-bold uppercase tracking-widest text-primary">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan">
                 {post.category}
               </p>
-              <h2 className="mt-3 text-4xl font-bold uppercase leading-none md:text-6xl">
+              <h2 className="mt-3 text-4xl font-[740] uppercase leading-[0.95] tracking-[-0.03em] md:text-6xl">
                 {post.title}
               </h2>
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
