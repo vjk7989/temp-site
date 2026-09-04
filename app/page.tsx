@@ -120,7 +120,7 @@ export default function Home() {
             <div className="absolute -right-8 -top-7 text-[10rem] font-bold leading-none text-primary/15 md:text-[14rem]">
               01
             </div>
-            <p className="relative text-sm font-bold uppercase tracking-widest text-accent">
+            <p className="relative text-sm font-bold uppercase tracking-widest text-primary">
               Trust Layer Active
             </p>
             <div className="relative mt-8 space-y-5">
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f6f2ff] py-20 text-[#10101a] md:py-28">
+      <section className="bg-[#f4f0ff] py-20 text-[#10101a] md:py-28">
         <div className="mx-auto w-[min(94vw,1500px)]">
           <SectionIntro
             eyebrow="The stack"
@@ -210,7 +210,7 @@ export default function Home() {
       <section id="architecture" className="mx-auto w-[min(94vw,1500px)] py-20 md:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-accent">
+            <p className="text-sm font-bold uppercase tracking-widest text-primary">
               End-to-end architecture
             </p>
             <h2 className="mt-4 text-5xl font-bold uppercase leading-none md:text-7xl">
@@ -233,14 +233,14 @@ export default function Home() {
                     Trust, settlement, and audit layer
                   </p>
                 </div>
-                <div className="text-right text-4xl font-bold text-accent">100%</div>
+                <div className="text-right text-4xl font-bold text-primary">100%</div>
               </div>
             </div>
           </Card>
         </div>
       </section>
 
-      <section className="border-y-2 border-border bg-muted/70 py-20 md:py-28">
+      <section className="border-y-2 border-border bg-[#f3f1fa] py-20 md:py-28">
         <div className="mx-auto grid w-[min(94vw,1500px)] gap-10 lg:grid-cols-2">
           <div>
             <SectionIntro
@@ -251,7 +251,7 @@ export default function Home() {
             <div className="mt-8 space-y-4">
               {proofPoints.map((point) => (
                 <div key={point} className="flex items-center gap-3 text-lg font-bold">
-                  <CheckCircle2 className="h-5 w-5 text-accent" />
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
                   {point}
                 </div>
               ))}
@@ -283,7 +283,7 @@ export default function Home() {
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {verticals.map(([name, Icon]) => (
             <Card key={name} className="flex items-center gap-4 p-5">
-              <Icon className="h-7 w-7 text-accent" />
+              <Icon className="h-7 w-7 text-primary" />
               <span className="text-xl font-bold uppercase">{name}</span>
             </Card>
           ))}
@@ -300,7 +300,7 @@ export default function Home() {
               Make enterprise AI provable.
             </h2>
           </div>
-          <Card className="border-accent-foreground bg-accent-foreground p-7 text-background">
+          <Card className="border-accent-foreground bg-white p-7 text-foreground">
             <div className="space-y-5">
               <ContactLine icon={Mail} text="info@pavii.tec" href="mailto:info@pavii.tec" />
               <ContactLine icon={Mail} text="vijay@buckleson.com" href="mailto:vijay@buckleson.com" />
@@ -331,7 +331,7 @@ function SectionIntro({
 }) {
   return (
     <div>
-      <p className={`text-sm font-bold uppercase tracking-widest ${light ? "text-primary" : "text-accent"}`}>
+      <p className="text-sm font-bold uppercase tracking-widest text-primary">
         {eyebrow}
       </p>
       <h2 className="mt-4 max-w-5xl text-5xl font-bold uppercase leading-none md:text-7xl">
@@ -357,7 +357,7 @@ function FlowNode({
 }) {
   return (
     <div className={`flex items-center gap-4 border-2 p-4 ${active ? "border-primary bg-primary/20" : "border-border bg-background"}`}>
-      <Icon className="h-7 w-7 text-accent" />
+      <Icon className="h-7 w-7 text-primary" />
       <div>
         <p className="font-bold uppercase">{title}</p>
         <p className="text-sm text-muted-foreground">{text}</p>
@@ -388,7 +388,7 @@ function ArchitectureBox({
 function Metric({ value, label }: { value: string; label: string }) {
   return (
     <div className="border-2 border-border p-5">
-      <p className="text-4xl font-bold text-accent">{value}</p>
+      <p className="text-4xl font-bold text-primary">{value}</p>
       <p className="mt-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
         {label}
       </p>

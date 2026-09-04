@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08080d;
-  --foreground: #f7f7fb;
-  --muted: #151521;
-  --muted-foreground: #a7a7b7;
-  --card: #10101a;
-  --card-foreground: #f7f7fb;
-  --border: #2c2c3c;
-  --primary: #a100ff;
+  --background: #fbfbff;
+  --foreground: #11111a;
+  --muted: #f0eef8;
+  --muted-foreground: #606070;
+  --card: #ffffff;
+  --card-foreground: #11111a;
+  --border: #ded8ea;
+  --primary: #8900e8;
   --primary-foreground: #ffffff;
-  --accent: #ddff00;
-  --accent-foreground: #07070a;
-  --ring: #b96cff;
+  --accent: #d8ff00;
+  --accent-foreground: #101014;
+  --ring: #8900e8;
 }
 
 @theme inline {
@@ -42,11 +42,12 @@ html {
 body {
   min-height: 100vh;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at top right, rgba(161, 0, 255, 0.16), transparent 34rem),
+    linear-gradient(rgba(137, 0, 232, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(137, 0, 232, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at top right, rgba(137, 0, 232, 0.13), transparent 34rem),
+    radial-gradient(circle at bottom left, rgba(216, 255, 0, 0.13), transparent 28rem),
     var(--background);
-  background-size: 44px 44px, 44px 44px, auto, auto;
+  background-size: 44px 44px, 44px 44px, auto, auto, auto;
   color: var(--foreground);
   font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
