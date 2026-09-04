@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   BrainCircuit,
@@ -16,34 +16,17 @@ import {
   Zap
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { SecureInteractionDiagram } from "@/components/architecture-diagrams";
+import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { contactUrl, products } from "@/lib/site-data";
 
-const contactUrl = "https://cal.com/buckleson-group/30min";
-
-const stack = [
-  {
-    name: "Hyper Tern",
-    label: "Routing and permissions",
-    icon: Split,
-    copy: "Routes LLM requests, controls access scopes, and keeps models away from direct infrastructure access.",
-    outcome: "Policy-controlled execution"
-  },
-  {
-    name: "Hyper-ABS",
-    label: "Data abstraction",
-    icon: Fingerprint,
-    copy: "Transforms sensitive records into masked, tokenized, or vector-safe representations before inference.",
-    outcome: "No raw exposure"
-  },
-  {
-    name: "Hyper-Ox Ledger",
-    label: "Blockchain trust layer",
-    icon: FileCheck2,
-    copy: "Records AI decisions and actions as immutable proof for audit, settlement, compliance, and disputes.",
-    outcome: "Verifiable audit trails"
-  }
-];
+const productIcons: Record<string, LucideIcon> = {
+  "hyper-tern": Split,
+  "hyper-abs": Fingerprint,
+  "hyper-ox-ledger": FileCheck2
+};
 
 const risks = [
   ["Access to data", "Sensitive user, enterprise, and operational records are needed for context."],
@@ -70,26 +53,7 @@ const proofPoints = [
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <header className="mx-auto flex w-[min(94vw,1500px)] items-center justify-between py-6">
-        <a href="#top" className="flex items-center gap-3" aria-label="Hyper-Ox home">
-          <Image
-            src="/bson-logo.jpg"
-            alt="Buckleson logo"
-            width={42}
-            height={42}
-            className="border border-border"
-            priority
-          />
-          <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-            Hyper-Ox by Buckleson
-          </span>
-        </a>
-        <Button asChild variant="outline" className="hidden sm:inline-flex">
-          <a href={contactUrl} target="_blank" rel="noreferrer">
-            Contact Us <ArrowRight className="h-4 w-4" />
-          </a>
-        </Button>
-      </header>
+      <SiteHeader />
 
       <section id="top" className="mx-auto w-[min(94vw,1500px)] pb-20 pt-8 lg:pb-28">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
@@ -186,9 +150,12 @@ export default function Home() {
             light
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {stack.map((item) => (
-              <Card key={item.name} className="border-[#d9caef] bg-white p-7 text-[#10101a]">
-                <item.icon className="h-10 w-10 text-primary" />
+            {products.map((item) => {
+              const Icon = productIcons[item.slug];
+              return (
+              <Link key={item.name} href={`/products#${item.slug}`} className="group block">
+              <Card className="h-full border-[#d9caef] bg-white p-7 text-[#10101a] transition group-hover:border-primary group-hover:bg-[#fbf8ff]">
+                <Icon className="h-10 w-10 text-primary" />
                 <CardHeader className="p-0 pt-8">
                   <p className="text-xs font-bold uppercase tracking-widest text-primary">
                     {item.label}
@@ -198,11 +165,13 @@ export default function Home() {
                 <CardContent className="p-0 pt-5">
                   <p className="text-lg leading-tight text-[#55566a]">{item.copy}</p>
                   <p className="mt-8 border-t border-[#d9caef] pt-5 text-sm font-bold uppercase tracking-widest">
-                    {item.outcome}
+                    {item.outcome} <ArrowRight className="inline h-4 w-4" />
                   </p>
                 </CardContent>
               </Card>
-            ))}
+              </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -217,26 +186,7 @@ export default function Home() {
               Every AI action passes through trust.
             </h2>
           </div>
-          <Card className="p-5 md:p-8">
-            <div className="grid gap-4 text-center md:grid-cols-3">
-              <ArchitectureBox title="Models" copy="Open-source and closed LLMs" />
-              <ArchitectureBox title="Hyper Tern" copy="Routing, permissions, model selection" active />
-              <ArchitectureBox title="Systems" copy="Databases, APIs, tools, apps" />
-            </div>
-            <div className="mt-5 border-2 border-primary bg-muted p-6">
-              <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-widest text-primary">
-                    Hyper-Ox Blockchain
-                  </p>
-                  <p className="mt-2 text-2xl font-bold uppercase">
-                    Trust, settlement, and audit layer
-                  </p>
-                </div>
-                <div className="text-right text-4xl font-bold text-primary">100%</div>
-              </div>
-            </div>
-          </Card>
+          <SecureInteractionDiagram />
         </div>
       </section>
 
@@ -362,25 +312,6 @@ function FlowNode({
         <p className="font-bold uppercase">{title}</p>
         <p className="text-sm text-muted-foreground">{text}</p>
       </div>
-    </div>
-  );
-}
-
-function ArchitectureBox({
-  title,
-  copy,
-  active = false
-}: {
-  title: string;
-  copy: string;
-  active?: boolean;
-}) {
-  return (
-    <div className={`border-2 p-5 ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background"}`}>
-      <p className="text-xl font-bold uppercase">{title}</p>
-      <p className={`mt-2 text-sm ${active ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
-        {copy}
-      </p>
     </div>
   );
 }
